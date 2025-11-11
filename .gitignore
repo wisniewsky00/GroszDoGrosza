@@ -1,0 +1,15 @@
+# Node (frontend)
+node_modules/
+dist/
+.env
+
+# Java / Spring Boot (backend)
+target/
+*.class
+*.jar
+*.war
+
+# IDE / system
+.idea/
+.vscode/
+.DS_Store
