@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +42,9 @@ public class User {
 
   @Column(name="role")
   private String role;
+
+  @PrePersist
+  protected void onCreate() {
+    this.createTime = LocalDateTime.now();
+  }
 }

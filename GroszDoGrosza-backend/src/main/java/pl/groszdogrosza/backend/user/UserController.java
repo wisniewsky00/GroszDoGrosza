@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,15 +20,9 @@ public class UserController {
     this.userRepository = userRepository;
   }
 
-  @PostMapping("/test")
-  public User createUser() {
-    User user = User.builder()
-      .username("Jan")
-      .email("jan@example.com")
-      .password("1234")
-      .role("USER")
-      .build();
-
+  @PostMapping("/register")
+  public User createUser(@RequestBody User user) {
+    user.setRole("USER");
     return userRepository.save(user);
   }
 
