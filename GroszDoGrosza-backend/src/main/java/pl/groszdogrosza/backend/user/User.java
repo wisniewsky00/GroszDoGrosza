@@ -1,6 +1,8 @@
 package pl.groszdogrosza.backend.user;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="id")
-  private Integer id;
+  private Long id;
 
   @Column(name="username")
   private String username;
@@ -34,6 +36,7 @@ public class User {
   @Column(name="email")
   private String email;
   
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Column(name="password")
   private String password;
 
