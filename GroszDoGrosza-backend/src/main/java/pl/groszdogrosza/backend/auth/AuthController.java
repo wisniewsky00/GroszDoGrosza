@@ -1,9 +1,10 @@
 package pl.groszdogrosza.backend.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.groszdogrosza.backend.user.User;
-
+import pl.groszdogrosza.backend.dto.LoginRequest;
+import pl.groszdogrosza.backend.dto.RegisterRequest;
 import pl.groszdogrosza.backend.user.UserService;
 
 @RestController
@@ -18,13 +19,18 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public User register(@RequestBody User user) {
-    return userService.registerUser(user);
+  public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+    return userService.register(registerRequest);
   }
 
   @PostMapping("/login")
-  public User login(@RequestBody User loginRequest) {
-    return userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword())
-      .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+  public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    return userService.login(loginRequest);
   }
 }
+
+// {
+//   "username": "Krzysiek",
+//   "email": "krzysiek@example.com",
+//   "password": "tajnehaslo"
+// }

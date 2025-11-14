@@ -3,7 +3,7 @@ import './App.css'
 import backendApi from './services/backendApi'
 
 function App() {
-  const [message, setMessage] = useState(0)
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
 
