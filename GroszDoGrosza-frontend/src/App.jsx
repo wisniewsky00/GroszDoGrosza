@@ -1,25 +1,18 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { backendApi } from './services/backendApi'
+import { DashboardPage } from "./pages/DashboardPage";
+import { LoginPage } from "./pages/LoginPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [message, setMessage] = useState('')
-
-  useEffect(() => {
-
-    const fetchMessageData = async () => {
-      const response = await backendApi.get('/test')
-      setMessage(response.data);
-    }
-
-    fetchMessageData();
-  }, [])
+export default function App() {
 
   return (
     <>
-      <h1>{message}</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginPage />}/>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
-export default App
