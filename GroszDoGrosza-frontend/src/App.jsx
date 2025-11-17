@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import backendApi from './services/backendApi'
+import { backendApi } from './services/backendApi'
 
 function App() {
   const [message, setMessage] = useState('')

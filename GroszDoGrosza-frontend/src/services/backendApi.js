@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-const backendApi = axios.create({
+export const backendApi = axios.create({
   baseURL: 'http://localhost:8080/api'
 });
 
-export default backendApi;
+backendApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
