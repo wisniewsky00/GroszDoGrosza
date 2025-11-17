@@ -42,7 +42,7 @@ public class UserService {
     user.setRole("USER");
     userRepository.save(user);
 
-    return ResponseEntity.ok(new LoginResponse(user));
+    return ResponseEntity.ok(new LoginResponse(user, null));
   }
 
   public ResponseEntity<?> login(LoginRequest loginRequest) {
@@ -50,7 +50,7 @@ public class UserService {
     Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
 
     if (user.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), user.get().getPassword())) {
-      return ResponseEntity.ok(new LoginResponse(user.get()));
+      return ResponseEntity.ok(new LoginResponse(user.get(), null));
     }
 
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
