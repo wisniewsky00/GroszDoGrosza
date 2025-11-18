@@ -12,6 +12,7 @@ import pl.groszdogrosza.backend.user.UserService;
 public class AuthController {
   
   private final UserService userService;
+  
 
   @Autowired
   public AuthController(UserService userService) {
