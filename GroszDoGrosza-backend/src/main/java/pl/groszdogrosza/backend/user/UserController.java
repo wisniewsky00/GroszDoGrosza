@@ -1,8 +1,5 @@
 package pl.groszdogrosza.backend.user;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 public class UserController {
 
-  private final UserRepository userRepository;
+  @GetMapping("/test")
+  public String test() {
+    return "Api User Test";
+  }
   
-  @Autowired
-  public UserController(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
-
-  @GetMapping
-  public List<User> getAll() {
-    return userRepository.findAll();
-  }
 }

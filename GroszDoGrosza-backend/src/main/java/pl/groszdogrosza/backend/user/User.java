@@ -1,8 +1,10 @@
 package pl.groszdogrosza.backend.user;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,5 +51,9 @@ public class User {
   @PrePersist
   protected void onCreate() {
     this.createTime = LocalDateTime.now();
+  }
+
+  public Collection<SimpleGrantedAuthority> getAuthorities() {
+    return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
   }
 }
