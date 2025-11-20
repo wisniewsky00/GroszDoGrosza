@@ -1,11 +1,13 @@
-import { useEffect } from "react";
-import { useAuth } from "../context/useAuth";
+import { useEffect, useState } from "react";
+import { useAuth} from "../context/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from "../utils/jwtUtils";
+import { backendApi } from "../services/backendApi";
 
 export function DashboardPage() {
-
+  
   const {user, token, logout} = useAuth();
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,34 +18,40 @@ export function DashboardPage() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("sprawdzanie tokena");
       if (token && isTokenExpired(token)) {
         logout();
-      } else {
-        console.log(token);
-        console.log(isTokenExpired(token));
       }
-    }, 5000);
+    }, 1000 * 60 * 5);
 
     return () => clearInterval(interval);
   }, [token, logout, navigate]);
+
+  const handleTestApi = async () => {
+    try {
+      const response = await backendApi.get("/users/test");
+      setMessage(response.data);
+    } catch (error) {
+      console.log(error);
+      setMessage("Błąd dostępu lub token wygasł"); 
+    }
+  }
 
   return (
     <>
       <h1>Dashboard</h1>
       <h2> Dane użytownika</h2>
 
-      {user ? (
+      {user && (
         <div>
           <p>ID: {user.id}</p>
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Role: {user.role}</p>
           <p>Token: {token}</p>
+          <button onClick={handleTestApi}>Sprawdź API USER</button>
         </div>
-      ) : (
-        <p>Ładowanie danych użytkownika</p>
       )}
+      {message && <p>Odpowiedź API: {message}</p>}
     </>
   );
 }
