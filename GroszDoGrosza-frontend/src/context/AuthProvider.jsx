@@ -9,7 +9,7 @@ export function AuthProvider( {children} ) {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("token")) || null
+    localStorage.getItem("token") || null
   );
 
   async function login(email, password) {
@@ -30,6 +30,8 @@ export function AuthProvider( {children} ) {
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+
+    window.location.href = "/";
   }
 
   return (
