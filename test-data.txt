@@ -1,4 +1,8 @@
 {
+  "email": "krzysiek@example.com",
+  "password": "tajnehaslo"
+
+  
   "email": "test@example.com",
   "password": "test"
 }

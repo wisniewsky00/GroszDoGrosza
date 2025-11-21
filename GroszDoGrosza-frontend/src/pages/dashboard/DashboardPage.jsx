@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAuth} from "../context/useAuth";
+import { useAuth} from "../../auth/useAuth";
 import { useNavigate } from 'react-router-dom';
-import { isTokenExpired } from "../utils/jwtUtils";
-import { backendApi } from "../services/backendApi";
+import { isTokenExpired } from "../../utils/jwtUtils";
+import { backendApi } from "../../services/backendApi";
 
 export function DashboardPage() {
   
@@ -36,6 +36,10 @@ export function DashboardPage() {
     }
   }
 
+  function handleLogout() {
+    logout();
+  }
+
   return (
     <>
       <h1>Dashboard</h1>
@@ -52,6 +56,8 @@ export function DashboardPage() {
         </div>
       )}
       {message && <p>Odpowiedź API: {message}</p>}
+
+      <button onClick={handleLogout}>Wyloguj</button>
     </>
   );
 }

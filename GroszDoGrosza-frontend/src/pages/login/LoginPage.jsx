@@ -1,13 +1,16 @@
-import { useAuth } from '../context/useAuth.js'
-import { LoginForm } from '../components/LoginForm.jsx'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth/useAuth.js'
+import { LoginForm } from './LoginForm.jsx'
 
 export function LoginPage() {
   const { login } = useAuth();
 
+  const navigate = useNavigate();
+
   async function handleSubmit(email, password) {
     try {
       await login(email, password);
-      window.location.href = "/dashboard";
+      navigate("/dashboard")
     } catch (err) {
       console.error(err);
       alert("Niepoprawne dane logowania");
