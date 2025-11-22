@@ -7,7 +7,10 @@ export const backendApi = axios.create({
 backendApi.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
-  if (token && token !== "null") {
+  const url = config.url || '';
+  const isAuthRoute = url.startsWith('/auth') || url.startsWith('/api/auth');
+
+  if (token && token !== "null" && !isAuthRoute) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
