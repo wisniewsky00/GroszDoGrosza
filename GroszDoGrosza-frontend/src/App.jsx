@@ -2,7 +2,7 @@ import { DashboardPage } from "./pages/dashboard/DashboardPage";
 import { HomePage } from "./pages/home/HomePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./pages/login/LoginPage";
-import { RegisterPage } from "./pages/registration/RegisterPage";
+import { RegisterPage } from "./pages/register/RegisterPage";
 
 export default function App() {
 

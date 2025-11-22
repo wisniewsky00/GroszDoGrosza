@@ -9,7 +9,10 @@ export function RegisterForm({ onSubmit }) {
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    onSubmit(username, email, password);
+    if (username !== "" && email !== "" && password !== "") {
+      onSubmit(username, email, password);
+    }
+
   }
 
   return (
