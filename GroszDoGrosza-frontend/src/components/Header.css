@@ -27,7 +27,7 @@
 }
 
 .header .logo {
-  height: 22px;
+  height: 23px;
   margin-top: 1px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .header .middle-section p {
-  font-size: 13px;
+  font-size: 14px;
   position: relative;
   margin: 0;
   cursor: pointer;
@@ -75,7 +75,7 @@
   font-family: Roboto;
   border: none;
   border-radius: 4px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   margin-left: 10px;
   font-weight: 600;
   cursor: pointer;
@@ -117,6 +117,11 @@
 /* Tablet */
 @media (max-width: 1024px) {
 
+  .header {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
   .header .left-section {
     width: unset;
   }
@@ -152,5 +157,3 @@
     margin-left: 6px;
   }
 }
-
-

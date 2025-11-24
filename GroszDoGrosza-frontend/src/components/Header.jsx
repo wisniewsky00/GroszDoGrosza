@@ -16,7 +16,8 @@ export function Header() {
 
       <div className="middle-section">
         <p>O nas</p>
-        <p>Usługi</p>
+        <p>Funkcje</p>
+        <p>Kontakt</p>
       </div>
 
       <div className="right-section">
