@@ -1,0 +1,79 @@
+.features-section {
+  margin-top: 140px;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.features-title-badge {
+  display: inline-block;
+  padding: 8px 18px;
+  background-color: #E3F8EC;
+  color: #228353;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.features-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.features-subtext {
+  color: #555;
+  max-width: 650px;
+  margin: 0 auto 60px auto;
+  font-size: 16px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-box {
+  display: flex;
+  gap: 20px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 32px;
+  padding: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon.green {
+  background-color: rgba(34, 131, 83, 0.15);
+}
+
+.feature-icon.blue {
+  background-color: rgba(52, 122, 255, 0.15);
+}
+
+.feature-icon.yellow {
+  background-color: rgba(255, 200, 80, 0.18);
+}
+
+.feature-icon.purple {
+  background-color: rgba(160, 90, 255, 0.15);
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feature-desc {
+  margin-top: 5px;
+  color: #555;
+  line-height: 1.5;
+}
