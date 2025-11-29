@@ -1,8 +1,7 @@
 .header {
-  background: linear-gradient(#1B263B, #0F1A2B);
-  color: white;
-  padding-left: 15px;
-  padding-right: 15px;
+  background-color: #ffffff;
+  color: #0F172A;
+  padding: 0 32px;
 
   display: flex;
   align-items: center;
@@ -13,148 +12,159 @@
   left: 0;
   right: 0;
   height: 80px;
-}
 
-.header .left-section {
-  width: 208px;
-}
-
-.header .right-section {
-  width: 180px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 1000;
 }
 
 .header .logo {
-  height: 28px;
-  margin-top: 1px;
+  height: 75px;
+  margin-top: 2px;
 }
 
-.header .middle-section {
-  flex: 1;
-  justify-content: center;
+.middle-section {
   display: flex;
-  gap: 20px;
+  gap: 32px;
   font-weight: 600;
+  margin-right: 34px;
+  margin-top: 6px;
 }
 
-.header .middle-section p {
+.middle-section a {
+  text-decoration: none;
+  color: #0F172A;
   font-size: 16px;
+  padding: 6px 0;
   position: relative;
-  margin: 0;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  color: white;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  white-space: nowrap;
+  transition: color .25s ease;
 }
 
-.header .middle-section p::after {
+.middle-section a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -2px;
+  bottom: -3px;
   width: 0%;
   height: 2px;
-  background-color: #2FAF6E;
-  transition: width 0.3s ease, bottom 0.3s ease;
+  background-color: #22A15A;
+  transition: width .25s ease;
 }
 
-.header .middle-section p:hover::after {
+.middle-section a:hover::after {
   width: 100%;
-  bottom: -2px;
 }
 
-.header .right-section {
-  flex-shrink: 0;
+.middle-section a:hover {
+  color: #22A15A;
+}
+
+/* RIGHT SECTION */
+.right-section {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .btn {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 10px 18px;
-  margin-left: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
-.header .btn-green {
+.btn-green {
   background-color: #2FAF6E;
   color: white;
 }
 
-.header .btn-green:hover {
+.btn-green:hover {
   background-color: #228353;
   transform: translateY(-2px);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-.header .btn-green:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.header .btn-blue {
+.btn-blue {
+  background-color: #2563EB;
   color: white;
-  background-color: #3A8DFF;
 }
 
-.header .btn-blue:hover {
-  background-color: #1E6FE3;
+.btn-blue:hover {
+  background-color: #1E3FAF;
   transform: translateY(-2px);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-.header .btn-blue:active {
-  transform: translateY(0);
-  box-shadow: none;
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  width: 30px;
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-
-  .header {
-    padding-right: 8px;
-    padding-left: 8px;
-  }
-
-  .header .left-section {
-    width: unset;
-  }
-
-  .header .logo {
-    height: 22px;
-    margin-top: 1px;
-  }
-
-  .header .middle-section p {
-    font-size: 14px;
-  }
-
-  .btn {
-    padding: 8px 14px;
-    margin-left: 8px;
-  }
+.burger span {
+  height: 3px;
+  width: 100%;
+  background: #0F172A;
+  transition: 0.3s;
+  border-radius: 3px;
 }
 
-/* Phones */
-@media (max-width: 700px) {
-  .header .logo {
-    height: 16px;
-    margin-top: 1px;
+.burger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 80px;
+  right: -325px;
+  width: 260px;
+  height: calc(100vh - 80px);
+  background: #ffffff;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  transition: right 0.3s ease;
+  z-index: 1500;
+}
+
+.mobile-menu.show {
+  right: 0;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #0F172A;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mobile-menu .btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (max-width: 1200px) {
+  .middle-section,
+  .right-section {
+    display: none;
   }
 
-  .header .middle-section p {
-    font-size: 11px;
-  }
-
-  .btn {
-    padding: 4px 8px;
-    margin-left: 6px;
+  .burger {
+    display: flex;
   }
 }

@@ -40,7 +40,7 @@ export function FeaturesSection() {
           <div>
             <h3 className="feature-title">Analiza i wizualizacje</h3>
             <p className="feature-desc">
-              Wykresy i statystyki pomagające zrozumieć wyniki Twoich inwestycji.
+              Twórz wykresy i statystyki, które pomogą zrozumieć wyniki Twoich inwestycji.
             </p>
           </div>
         </div>
