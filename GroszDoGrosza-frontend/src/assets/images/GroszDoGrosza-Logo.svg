@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 360 120"
+     width="100%"
+     role="img">
+
+  <style>
+    .green { fill:#1B263B; font-family:'Roboto','Helvetica',sans-serif; font-weight:800; font-size:48px; }
+    .doBg { fill:#24D189 }
+    .doText { fill:#FFFFFF; font-family:'Roboto','Helvetica',sans-serif; font-weight:700; font-size:38px; }
+  </style>
+
+  <!-- "Grosz" -->
+  <text class="green" x="0" y="78">Grosz</text>
+
+  <!-- DO box -->
+  <g transform="translate(132, 39)">
+    <rect class="doBg" width="62" height="46" rx="10" ry="10"/>
+    <text class="doText" x="30" y="38" text-anchor="middle">Do</text>
+  </g>
+
+  <!-- "Grosza" -->
+  <text class="green" x="197" y="80">Grosza</text>
+</svg>
