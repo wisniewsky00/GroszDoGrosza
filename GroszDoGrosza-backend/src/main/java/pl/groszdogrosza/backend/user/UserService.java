@@ -34,10 +34,10 @@ public class UserService {
 
     if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-        .body(Map.of("error", "Email already in use"));
+        .body(Map.of("error", "Podany adres e-mail jest już zajęty!"));
     } else if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-        .body(Map.of("error", "Username already in use"));
+        .body(Map.of("error", "Podana nazwa użytkownika jest już zajęta!"));
     }
 
     User user = new User();

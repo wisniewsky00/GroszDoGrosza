@@ -3,7 +3,7 @@ import GrowthChart from '../../assets/images/Growth-chart.png';
 
 export function MissionSection() {
   return (
-    <section className="mission-section">
+    <section className="mission-section" id="mission">
 
       <div className="mission-badge">Nasza misja</div>
 

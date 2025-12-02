@@ -1,0 +1,78 @@
+.register-wrapper {
+  min-height: 100vh;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+.register-card {
+  height: 550px;
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  margin-top: 100px;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.register-card h1 {
+  margin-bottom: 50px;
+  font-size: 28px;
+  color: #111827;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.input-label {
+  text-align: left;
+  font-size: 13px;
+  color: #374151;
+  margin-left: 3px;
+  margin-bottom: -6px;
+  margin-top: 4px;
+}
+
+.register-form input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+.register-form input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.register-btn {
+  margin: 20px auto 0 auto;
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 8px;
+  border: none;
+  background: #10b981;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register-btn:hover {
+  background: #059669;
+}
+
+@media(max-width: 600px) {
+  .back-button {
+    font-size: 22px;
+    top: 50px;
+  }
+}
