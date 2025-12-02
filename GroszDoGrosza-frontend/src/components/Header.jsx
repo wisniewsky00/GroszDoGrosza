@@ -28,9 +28,33 @@ export function Header() {
       </div>
 
       <nav className="middle-section">
-        <NavLink to="/#mission">Nasza misja</NavLink>
-        <NavLink to="/#features">Funkcje</NavLink>
-        <NavLink to="/#contact">Kontakt</NavLink>
+        <NavLink 
+          to="/#mission"
+          onClick={() => {
+            const el = document.getElementById("mission");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+          }}
+        >
+          Nasza misja
+        </NavLink>
+        <NavLink 
+          to="/#features"
+          onClick={() => {
+            const el = document.getElementById("features");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+          }}
+        >
+          Funkcje
+        </NavLink>
+        <NavLink 
+          to="/#contact"
+          onClick={() => {
+            const el = document.getElementById("contact");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+          }}
+        >
+          Kontakt
+        </NavLink>
       </nav>
 
       <div className="right-section">
@@ -57,9 +81,36 @@ export function Header() {
       <div
         className={`mobile-menu ${menuOpen ? "show" : ""}`}
       >
-        <NavLink onClick={() => setMenuOpen(false)} to="/#mission">Nasza misja</NavLink>
-        <NavLink onClick={() => setMenuOpen(false)} to="/#features">Funkcje</NavLink>
-        <NavLink onClick={() => setMenuOpen(false)} to="/#contact">Kontakt</NavLink>
+        <NavLink
+          to="/#mission"
+          onClick={() => {
+            const el = document.getElementById("mission");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+            setMenuOpen(false);
+          }}
+        >
+          Nasza misja
+        </NavLink>
+        <NavLink
+          to="/#features"
+          onClick={() => {
+            const el = document.getElementById("features");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+            setMenuOpen(false);
+          }}
+        >
+          Funkcje
+        </NavLink>
+        <NavLink 
+          to="/#contact"
+          onClick={() => {
+            const el = document.getElementById("contact");
+            if (el) el.scrollIntoView({behavior: 'smooth', block: "start"});
+            setMenuOpen(false);
+          }}
+        >
+          Kontakt
+        </NavLink>
 
         <button onClick={() => {navigate("/login"); setMenuOpen(false)}} className="btn btn-green">
           Logowanie
