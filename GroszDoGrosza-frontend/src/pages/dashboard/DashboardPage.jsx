@@ -3,6 +3,7 @@ import { useAuth} from "../../auth/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from "../../utils/jwtUtils";
 import { backendApi } from "../../services/backendApi";
+import { DashboardHeader } from "./DashboarHeader";
 
 export function DashboardPage() {
   
@@ -42,6 +43,8 @@ export function DashboardPage() {
 
   return (
     <>
+      <DashboardHeader />
+
       <h1>Dashboard</h1>
       <h2> Dane użytownika</h2>
 
