@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router';
-import Logo from '../assets/images/GroszDoGrosza-Logo.svg';
+import Logo from '../assets/images/GroszDoGrosza-Logo.png';
 import './Header.css';
 import { useEffect, useState } from 'react';
 
