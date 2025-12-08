@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 350 120"
+     viewBox="0 0 400 120"
      width="100%"
      role="img">
 
@@ -13,11 +13,11 @@
   <text class="green" x="0" y="78">Grosz</text>
 
   <!-- DO box -->
-  <g transform="translate(130, 39)">
+  <g transform="translate(152, 39)">
     <rect class="doBg" width="62" height="46" rx="10" ry="10"/>
-    <text class="doText" x="30" y="38" text-anchor="middle">Do</text>
+    <text class="doText" x="32" y="38" text-anchor="middle">Do</text>
   </g>
 
   <!-- "Grosza" -->
-  <text class="green" x="193" y="80">Grosza</text>
+  <text class="green" x="215" y="80">Grosza</text>
 </svg>
