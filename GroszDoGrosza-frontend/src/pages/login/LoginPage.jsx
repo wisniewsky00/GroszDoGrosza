@@ -12,14 +12,6 @@ export function LoginPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    }
-  }, []);
-
   async function handleSubmit(email, password, setError) {
     try {
       await login(email, password);
