@@ -13,14 +13,6 @@ export function RegisterPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    }
-  }, []);
-
   async function handleSubmit(username, email, password, setError) {
     try {
       await register(username, email, password);
