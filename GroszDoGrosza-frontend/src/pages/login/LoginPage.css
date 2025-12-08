@@ -8,7 +8,7 @@
 }
 
 .back-button {
-  position: absolute;
+  position: fixed;
   top: 25px;
   left: 20px;
   background: transparent;
