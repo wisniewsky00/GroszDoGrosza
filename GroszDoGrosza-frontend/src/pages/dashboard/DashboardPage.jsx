@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from "../../utils/jwtUtils";
 import { DashboardHeader } from "./DashboarHeader";
 import './DashboardPage.css';
+import { TileGrid } from "../../components/dashboard/TileGrid";
 
 export function DashboardPage() {
 
@@ -27,8 +28,11 @@ export function DashboardPage() {
   }, [token, logout, navigate]);
 
   return (
-    <>
+    <div className="dashboard-page">
       <DashboardHeader user={user} logout={logout}/>
-    </>
+      <div className="dashboard-content">
+        <TileGrid />
+      </div>
+    </div>
   );
 }

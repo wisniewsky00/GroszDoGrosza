@@ -10,6 +10,8 @@
   padding-left: 32px;
   padding-right: 48px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: white;
+  z-index: 1000;
 }
 
 .dashboard-header .logo {
@@ -88,6 +90,7 @@
 }
 
 .dropdown-menu p {
+  display: inline-block;
   color: rgb(15, 23, 42);
   font-weight: bold;
   cursor: pointer;
@@ -97,6 +100,21 @@
 
 .dropdown-menu p:hover {
   color: #22A15A;
+}
+
+.dropdown-menu p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #22A15A;
+  transition: width .25s ease;
+}
+
+.dropdown-menu p:hover::after {
+  width: 100%;
 }
 
 .logout-btn {
@@ -113,4 +131,22 @@
 
 .logout-btn:hover {
   background-color: #b91c1c;
+}
+
+@media (max-width: 600px) {
+  .dropdown-menu {
+    display: flex;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 20px;
+  }
+
+  .dropdown-menu.open {
+    min-height: 100vh;
+  }
 }

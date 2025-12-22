@@ -1,0 +1,20 @@
+.tile {
+  background-color: white;
+  padding: 24px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: #0F172A;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+.tile-icon {
+  width: 48px;
+  height: 48px;
+}

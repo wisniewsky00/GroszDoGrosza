@@ -1,4 +1,4 @@
-import { Header } from '../../components/Header';
+import { HomePageHeader } from './HomePageHeader';
 import { MissionSection } from '../../components/sections/MissionSection';
 import { FeaturesSection } from '../../components/sections/FeaturesSection';
 import { ContactSection } from '../../components/sections/ContactSection';
@@ -9,7 +9,7 @@ export function HomePage() {
 
   return (
     <>
-      <Header />
+      <HomePageHeader />
       <MissionSection />
       <FeaturesSection />
       <ContactSection />
