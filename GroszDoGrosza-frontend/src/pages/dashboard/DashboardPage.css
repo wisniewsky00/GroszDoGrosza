@@ -1,3 +1,17 @@
 .user-data {
   margin-top: 80px;
 }
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.dashboard-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 50px;
+}

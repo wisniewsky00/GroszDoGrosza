@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from 'react-router';
-import Logo from '../assets/images/GroszDoGrosza-Logo.png';
-import './Header.css';
+import Logo from '../../assets/images/GroszDoGrosza-Logo.png';
+import './HomePageHeader.css';
 import { useEffect, useState } from 'react';
 
-export function Header() {
+export function HomePageHeader() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
