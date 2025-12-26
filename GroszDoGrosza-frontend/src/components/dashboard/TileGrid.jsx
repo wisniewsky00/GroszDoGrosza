@@ -16,6 +16,16 @@ export function TileGrid() {
       path: "/portfolios",
       icon: walletIcon,
     },
+    {
+      title: "Portfele inwestycyjne",
+      path: "/portfolios",
+      icon: walletIcon,
+    },
+    {
+      title: "Portfele inwestycyjne",
+      path: "/portfolios",
+      icon: walletIcon,
+    }
   ];
 
   return(
