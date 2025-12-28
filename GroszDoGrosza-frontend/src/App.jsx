@@ -3,6 +3,9 @@ import { HomePage } from "./pages/home/HomePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./pages/login/LoginPage";
 import { RegisterPage } from "./pages/register/RegisterPage";
+import { ArticlesPage } from "./pages/articles/ArticlesPage";
+import { PublicLayout } from "./layouts/PublicLayout";
+import { AuthenticatedLayout } from "./layouts/AuthenticatedLayout";
 
 export default function App() {
 
@@ -10,11 +13,20 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}/>
-          <Route path="/register" element={<RegisterPage />}/>
-          <Route path="/login" element={<LoginPage />}/> 
-          <Route path="/dashboard" element={<DashboardPage />}/>
+
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} /> 
+          </Route>
+
+
+          <Route element={<AuthenticatedLayout />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/articles" element={<ArticlesPage />} />
+          </Route>
         </Routes>
+
       </BrowserRouter>
     </>
   )

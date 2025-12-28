@@ -4,15 +4,20 @@ import UserAvatar from '../assets/images/User-avatar.svg.png';
 import DownArrow from '../assets/images/icons/down-arrow.png';
 import UpArrow from '../assets/images/icons/up-arrow.png';
 import { useState } from 'react';
+import { useAuth } from '../auth/useAuth';
+import { Link } from 'react-router';
 
-export function UserHeader({ user, logout }) {
+export function UserHeader() {
 
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
 
   return (
     <div className="dashboard-header">
       <div className="left-section">
-        <img className="logo" src={Logo} />
+        <Link to="/dashboard">
+          <img className="logo" src={Logo} />
+        </Link>
       </div>
       <div className="right-section" onClick={() => setOpen(!open)}>
         <img className="user-avatar" src={UserAvatar} />

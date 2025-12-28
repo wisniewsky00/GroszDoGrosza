@@ -16,6 +16,7 @@
 
 .dashboard-header .logo {
   height: 75px;
+  cursor: pointer;
 }
 
 .dashboard-header .right-section {
