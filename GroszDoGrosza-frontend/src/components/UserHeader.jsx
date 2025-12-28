@@ -1,11 +1,11 @@
-import './DashboardHeader.css';
-import Logo from '../../assets/images/GroszDoGrosza-Logo.png';
-import UserAvatar from '../../assets/images/User-avatar.svg.png';
-import DownArrow from '../../assets/images/icons/down-arrow.png';
-import UpArrow from '../../assets/images/icons/up-arrow.png';
+import './UserHeader.css';
+import Logo from '../assets/images/GroszDoGrosza-Logo.png';
+import UserAvatar from '../assets/images/User-avatar.svg.png';
+import DownArrow from '../assets/images/icons/down-arrow.png';
+import UpArrow from '../assets/images/icons/up-arrow.png';
 import { useState } from 'react';
 
-export function DashboardHeader({ user, logout }) {
+export function UserHeader({ user, logout }) {
 
   const [open, setOpen] = useState(false);
 

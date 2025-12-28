@@ -2,14 +2,29 @@ import { useEffect} from "react";
 import { useAuth } from "../../auth/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from "../../utils/jwtUtils";
-import { DashboardHeader } from "./DashboarHeader";
+import { UserHeader } from "../../components/UserHeader";
 import './DashboardPage.css';
-import { TileGrid } from "../../components/dashboard/TileGrid";
+import { TileGrid } from "../../components/tiles/TileGrid";
+import articlesIcon from '../../assets/images/icons/articles.png';
+import walletIcon from '../../assets/images/icons/wallet.png';
 
 export function DashboardPage() {
 
   const { user, token, logout } = useAuth();
   const navigate = useNavigate();
+
+    const tiles = [
+    {
+      title: "Artykuły",
+      path: "/articles",
+      icon: articlesIcon,
+    },
+    {
+      title: "Portfele inwestycyjne",
+      path: "/portfolios",
+      icon: walletIcon,
+    }
+  ];
 
   useEffect(() => {
     if (!user) {
@@ -29,9 +44,9 @@ export function DashboardPage() {
 
   return (
     <div className="dashboard-page">
-      <DashboardHeader user={user} logout={logout}/>
+      <UserHeader user={user} logout={logout}/>
       <div className="dashboard-content">
-        <TileGrid />
+        <TileGrid tiles={tiles}/>
       </div>
     </div>
   );
