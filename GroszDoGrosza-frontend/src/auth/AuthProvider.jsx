@@ -45,8 +45,6 @@ export function AuthProvider( {children} ) {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     localStorage.clear();
-
-    window.location.href = "/";
   }
 
   return (

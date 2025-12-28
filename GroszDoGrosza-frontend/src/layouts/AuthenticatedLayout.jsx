@@ -19,7 +19,7 @@ export function AuthenticatedLayout() {
   }, [token, logout]);
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace/>;
   }
 
   return (
