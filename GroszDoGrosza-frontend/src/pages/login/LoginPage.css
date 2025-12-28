@@ -146,3 +146,16 @@
 .login-btn:hover {
   background: #4338ca;
 }
+
+.login-card .register-message {
+  margin-top: 32px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.register-link {
+  color: #4f46e5;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}

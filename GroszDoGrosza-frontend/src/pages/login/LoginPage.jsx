@@ -32,6 +32,7 @@ export function LoginPage() {
       <div className="login-card">
         <h1>Logowanie</h1>
         <LoginForm onSubmit={handleSubmit}></LoginForm>
+        <p className="register-message">Nie masz konta? <span className="register-link" onClick={() => navigate("/register")}>Zarejestruj się</span></p>
       </div>
 
     </div>
