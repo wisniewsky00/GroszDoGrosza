@@ -16,23 +16,27 @@ import EtfIcon from '../../assets/images/icons/etf.png';
 import PreferencesIcon from '../../assets/images/icons/preferences.png';
 import PortfolioIcon from '../../assets/images/icons/portfolio.png';
 import BrokerageAccountIcon from '../../assets/images/icons/account.png';
+import { Outlet } from 'react-router';
+import { useMatch } from 'react-router';
 
 export function ArticlesPage() {
+
+  const isArticlesIndex = useMatch("/articles");
 
   const investmentStrategyTiles = [
     {
       title: "Inwestowanie pasywne",
-      path: "",
+      path: "passive-investing",
       icon: passiveInvestingIcon,
     },
     {
       title: "Inwestowanie aktywne",
-      path: "",
+      path: "active-investing",
       icon: activeInvestingIcon,
     },
     {
       title: "Spekulacje",
-      path: "",
+      path: "speculation",
       icon: speculationIcon,
     }
   ];
@@ -40,27 +44,27 @@ export function ArticlesPage() {
   const assetClassTiles = [
     {
       title: "Akcje",
-      path: "",
+      path: "shares",
       icon: SharesIcon,
     },
     {
       title: "Obligacje",
-      path: "",
+      path: "bonds",
       icon: BondIcon,
     },
     {
       title: "Nieruchomości",
-      path: "",
+      path: "real-estate",
       icon: RealEstateIcon,
     },
     {
       title: "Złoto",
-      path: "",
+      path: "gold",
       icon: GoldIcon,
     },
     {
       title: "Kryptowaluty",
-      path: "",
+      path: "cryptocurrencies",
       icon: CryptoCurrencyIcon,
     },
   ]
@@ -68,22 +72,22 @@ export function ArticlesPage() {
   const investmentVehicles = [
     {
       title: "Giełdy",
-      path: "",
+      path: "stock-market",
       icon: ExchangeIcon,
     },
     {
       title: "Indeksy",
-      path: "",
+      path: "indexes",
       icon: IndexIcon,
     },
     {
       title: "Inwestowanie bezpośrednie",
-      path: "",
+      path: "direct-investing",
       icon: DirectInvestmentIcon,
     },
     {
       title: "Inwestowanie pośrednie",
-      path: "",
+      path: "indirect-investing",
       icon: IndirectInvestmentIcon,
     }
   ];
@@ -91,47 +95,53 @@ export function ArticlesPage() {
   const investmentPreparation = [
   {
     title: "Fundusze ETF",
-    path: "",
+    path: "etf-funds",
     icon: EtfIcon,
   },
   {
     title: "Preferencje inwestycyjne",
-    path: "",
+    path: "investment-preferences",
     icon: PreferencesIcon,
   },
   {
     title: "Budowa portfela inwestycyjnego",
-    path: "",
+    path: "portfolio-construction",
     icon: PortfolioIcon,
   },
   {
     title: "Konto maklerskie",
-    path: "",
+    path: "brokerage-account",
     icon: BrokerageAccountIcon,
   },
 ];
 
   return (
     <div className="articles-container">
-      <div className="articles-grid">
-        <h2 className="articles-title">1. Strategie Inwestycyjne</h2>
-        <TileGrid tiles={investmentStrategyTiles} />
-      </div>
+      {isArticlesIndex && (
+        <>
+          <div className="articles-grid">
+            <h2 className="articles-title">1. Strategie Inwestycyjne</h2>
+            <TileGrid tiles={investmentStrategyTiles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">2. Podstawowe klasy aktywów inwestycyjncyh </h2>
-        <TileGrid tiles={assetClassTiles} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">2. Podstawowe klasy aktywów inwestycyjnych</h2>
+            <TileGrid tiles={assetClassTiles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">3. Dostęp do rynku inwestycyjnego</h2>
-        <TileGrid tiles={investmentVehicles} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">3. Dostęp do rynku inwestycyjnego</h2>
+            <TileGrid tiles={investmentVehicles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">4. Przygotowanie do inwestowania</h2>
-        <TileGrid tiles={investmentPreparation} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">4. Przygotowanie do inwestowania</h2>
+            <TileGrid tiles={investmentPreparation} />
+          </div>
+        </>
+      )}
+
+      <Outlet />
     </div>
   );
 }

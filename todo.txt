@@ -1,0 +1,11 @@
+3. Załozyć email dla GDG i zrobić działającą sekcję Kontakt w HomePage 
+4. Zrobić mechanizm potwierdzania e-mail podczas rejestracji
+5. Ograniczyć długość nazwy użytkownika do max 10 znaków i tylko litery i cyfry
+6. Zrobić mechanizm przypominania hasła
+7. Zrobić stronę edytowania profilu (zmiana nazwy użytkownika, email i hasła)
+8. Powiększyć dropdown-menu na max width 600px w UserHeader
+9. Zrobić stronę portfeli inwestycyjnych
+10. Zrobić stronę dla portfela inwestycyjnego
+11. Zrobić mechanizm zapisanego JSON WEB tokenu aby nie wywalalo z sesji po godzinie lub wylogowywać po nieaktywności na stronie
+
+12. Zrobić arytykuł o budowie portfela inwestycyjnego opartego na stworzonym narzędziu aplikacji 
