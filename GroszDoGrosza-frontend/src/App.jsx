@@ -6,6 +6,7 @@ import { RegisterPage } from "./pages/register/RegisterPage";
 import { ArticlesPage } from "./pages/articles/ArticlesPage";
 import { PublicLayout } from "./layouts/PublicLayout";
 import { AuthenticatedLayout } from "./layouts/AuthenticatedLayout";
+import { ArticlePage } from "./pages/articles/ArticlePage";
 
 export default function App() {
 
@@ -23,7 +24,9 @@ export default function App() {
 
           <Route element={<AuthenticatedLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/articles" element={<ArticlesPage />} >
+              <Route path=":slug" element={<ArticlePage />}/>
+            </Route>
           </Route>
         </Routes>
 
