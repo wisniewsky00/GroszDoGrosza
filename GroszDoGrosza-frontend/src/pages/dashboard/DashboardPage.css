@@ -2,18 +2,7 @@
   margin-top: 80px;
 }
 
-.dashboard-page {
-  display: flex;
-  flex-direction: column;
-  padding-top: 80px;
-  overflow: hidden;
-  background: #fcfcfc;
-  height: 100vh;
-}
-
 .dashboard-content {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 50px;
+  margin-top: 140px;
+  height: 100vh;
 }
