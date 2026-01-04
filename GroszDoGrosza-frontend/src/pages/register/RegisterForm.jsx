@@ -65,7 +65,6 @@ export function RegisterForm({ onSubmit }) {
     return valid;
   }
 
-
   function handleFormSubmit(e) {
     e.preventDefault();
     if (!validate()) return;
@@ -110,6 +109,11 @@ export function RegisterForm({ onSubmit }) {
         placeholder="Nazwa użytkownika"
         value={username}
         onChange={(e) => {
+          const value = e.target.value;
+
+          if (!/^[a-zA-Z0-9]*$/.test(value)) return;
+
+          if (value.length > 12) return;
 
           if (error) {
             setError(false);
@@ -130,6 +134,9 @@ export function RegisterForm({ onSubmit }) {
         value={email}
         onChange={(e) => {
           const value = e.target.value;
+
+          if (value.includes(" ")) return;
+
           setEmail(value);
 
           if (error) {
@@ -157,6 +164,9 @@ export function RegisterForm({ onSubmit }) {
           value={password}
           onChange={(e) => {
             const value = e.target.value;
+
+            if (value.includes(" ")) return;
+
             setPassword(value);
 
             if (error) {
