@@ -97,3 +97,9 @@
 .article-definition strong {
   color: #0f172a;
 }
+
+@media (max-width: 600px) {
+  .back-link {
+    display: none;
+  }
+}

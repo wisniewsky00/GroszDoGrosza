@@ -159,3 +159,9 @@
   cursor: pointer;
   transition: color 0.2s;
 }
+
+@media (max-width: 600px) {
+  .back-button {
+    display: none;
+  }
+}

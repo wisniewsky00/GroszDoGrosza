@@ -144,10 +144,20 @@
     bottom: 0;
     justify-content: flex-start;
     padding-top: 50px;
-    gap: 20px;
+    gap: 40px;
   }
 
   .dropdown-menu.open {
     min-height: 100vh;
+  }
+
+  .dropdown-menu p {
+    font-size: 20px;
+  }
+
+  .logout-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 17px;
   }
 }
