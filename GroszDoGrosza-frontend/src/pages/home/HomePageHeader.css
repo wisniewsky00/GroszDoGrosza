@@ -20,6 +20,7 @@
 .header .logo {
   height: 75px;
   margin-top: 2px;
+  cursor: pointer;
 }
 
 .middle-section {
@@ -200,7 +201,17 @@
     padding: 16px 0;
   }
 
+  .mobile-menu a {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
   .mobile-menu .btn {
+    margin-top: 15px;
+    margin-bottom: 10px;
     width: 90%;
+    padding: 14px;
+    font-size: 17px;
   }
 }

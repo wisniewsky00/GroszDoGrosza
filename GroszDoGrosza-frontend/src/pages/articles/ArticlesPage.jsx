@@ -17,8 +17,11 @@ import PreferencesIcon from '../../assets/images/icons/preferences.png';
 import PortfolioIcon from '../../assets/images/icons/portfolio.png';
 import BrokerageAccountIcon from '../../assets/images/icons/account.png';
 import { Outlet } from 'react-router';
+import { useMatch } from 'react-router';
 
 export function ArticlesPage() {
+
+  const isArticlesIndex = useMatch("/articles");
 
   const investmentStrategyTiles = [
     {
@@ -69,7 +72,7 @@ export function ArticlesPage() {
   const investmentVehicles = [
     {
       title: "Giełdy",
-      path: "stock-exchanges",
+      path: "stock-market",
       icon: ExchangeIcon,
     },
     {
@@ -79,12 +82,12 @@ export function ArticlesPage() {
     },
     {
       title: "Inwestowanie bezpośrednie",
-      path: "direct-investment",
+      path: "direct-investing",
       icon: DirectInvestmentIcon,
     },
     {
       title: "Inwestowanie pośrednie",
-      path: "indirect-investment",
+      path: "indirect-investing",
       icon: IndirectInvestmentIcon,
     }
   ];
@@ -114,25 +117,29 @@ export function ArticlesPage() {
 
   return (
     <div className="articles-container">
-      <div className="articles-grid">
-        <h2 className="articles-title">1. Strategie Inwestycyjne</h2>
-        <TileGrid tiles={investmentStrategyTiles} />
-      </div>
+      {isArticlesIndex && (
+        <>
+          <div className="articles-grid">
+            <h2 className="articles-title">1. Strategie Inwestycyjne</h2>
+            <TileGrid tiles={investmentStrategyTiles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">2. Podstawowe klasy aktywów inwestycyjncyh </h2>
-        <TileGrid tiles={assetClassTiles} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">2. Podstawowe klasy aktywów inwestycyjnych</h2>
+            <TileGrid tiles={assetClassTiles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">3. Dostęp do rynku inwestycyjnego</h2>
-        <TileGrid tiles={investmentVehicles} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">3. Dostęp do rynku inwestycyjnego</h2>
+            <TileGrid tiles={investmentVehicles} />
+          </div>
 
-      <div className="articles-grid">
-        <h2 className="articles-title">4. Przygotowanie do inwestowania</h2>
-        <TileGrid tiles={investmentPreparation} />
-      </div>
+          <div className="articles-grid">
+            <h2 className="articles-title">4. Przygotowanie do inwestowania</h2>
+            <TileGrid tiles={investmentPreparation} />
+          </div>
+        </>
+      )}
 
       <Outlet />
     </div>

@@ -70,9 +70,8 @@
   background: #059669;
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
   .back-button {
-    font-size: 22px;
-    top: 50px;
+    display: none;
   }
 }

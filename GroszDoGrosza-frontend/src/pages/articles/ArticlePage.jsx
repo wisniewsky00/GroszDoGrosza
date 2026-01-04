@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { articlesMap } from "./articlesMap";
+import { Navigate } from "react-router-dom";
+import './ArticlePage.css';
 
 export function ArticlePage() {
 
@@ -14,7 +16,13 @@ export function ArticlePage() {
 
   return (
     <article className="article-page">
-      <ArticleComponent />
+      <Link to="/articles" className="back-link">
+        ← Wróć do artykułów
+      </Link>
+
+      <div className="article-content">
+        <ArticleComponent />
+      </div>
     </article>
   )
 }
