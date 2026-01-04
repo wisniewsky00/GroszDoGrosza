@@ -8,6 +8,7 @@ import { PublicLayout } from "./layouts/PublicLayout";
 import { AuthenticatedLayout } from "./layouts/AuthenticatedLayout";
 import { ArticlePage } from "./pages/articles/ArticlePage";
 import ScrollToTop from "./components/ScrollToTop";
+import { VerifyEmailInfoPage } from "./pages/register/VerifyEmailInfoPage";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} /> 
+            <Route path="/verify-email" element={<VerifyEmailInfoPage />} />
           </Route>
 
 

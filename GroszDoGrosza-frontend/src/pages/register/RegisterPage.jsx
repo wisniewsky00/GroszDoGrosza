@@ -16,7 +16,7 @@ export function RegisterPage() {
   async function handleSubmit(username, email, password, setError) {
     try {
       await register(username, email, password);
-      navigate("/dashboard");
+      navigate("/verify-email");
     } catch (error) {
       setError(error.response?.data?.error || "Wystapił błąd");
     }

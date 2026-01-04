@@ -1,22 +1,13 @@
 package pl.groszdogrosza.backend.user;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name="users")
@@ -48,9 +39,13 @@ public class User {
   @Column(name="role")
   private String role;
 
+  @Column(name = "email_verified", nullable = false)
+  private boolean emailVerified;
+
   @PrePersist
   protected void onCreate() {
     this.createTime = LocalDateTime.now();
+    this.emailVerified = false;
   }
 
   public Collection<SimpleGrantedAuthority> getAuthorities() {

@@ -9,12 +9,14 @@ public class UserDto {
   private String username;
   private String email;
   private String role;
+  private boolean emailVerified;
 
   public UserDto(User user) {
     this.id = user.getId();
     this.username = user.getUsername();
     this.email = user.getEmail();
     this.role = user.getRole();
+    this.emailVerified = user.isEmailVerified();
   }
 
 }

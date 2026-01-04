@@ -1,10 +1,8 @@
-4. Zrobić mechanizm potwierdzania e-mail podczas rejestracji\
+4. Zrobić mechanizm potwierdzania e-mail podczas rejestracji
 
 6. Zrobić mechanizm przypominania hasła
 
 7. Zrobić stronę edytowania profilu (zmiana nazwy użytkownika, email i hasła)
-
-8. Powiększyć dropdown-menu na max width 600px w UserHeader
 
 9. Zrobić stronę portfeli inwestycyjnych
 
