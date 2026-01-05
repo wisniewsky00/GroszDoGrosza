@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { articlesMap } from "./articlesMap";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import './ArticlePage.css';
 
 export function ArticlePage() {

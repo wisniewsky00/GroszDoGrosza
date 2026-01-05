@@ -2,7 +2,7 @@ import { useState } from "react";
 import EyeIcon from '../../assets/images/icons/eye.svg';
 import EyeOffIcon from '../../assets/images/icons/eye-off.svg';
 
-export function RegisterForm({ onSubmit }) {
+export function RegisterForm({ onSubmit, loading }) {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -193,7 +193,14 @@ export function RegisterForm({ onSubmit }) {
       </div>
       {passwordError && <p className="input-error">{passwordError}</p>}
 
-      <button className="register-btn">Zarejestruj się</button>
+      <button className="register-btn" disabled={loading}>
+        {loading ? (
+          <>
+            <i className="fa fa-spinner fa-spin" style={{ marginRight: 8 }} />
+            Ładowanie...
+          </>
+        ) : "Zarejestruj się"}
+      </button>
     </form>
   );
 }

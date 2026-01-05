@@ -28,15 +28,42 @@
   font-size: 15px;
   color: #374151;
   line-height: 1.6;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
-.verify-card p:last-of-type {
-  margin-bottom: 28px;
+.verify-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.verify-form label {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.verify-form input {
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.verify-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
 .verify-btn {
-  width: 100%;
+  margin-top: 18px;
   padding: 14px;
   font-size: 16px;
   font-weight: 600;
@@ -53,9 +80,38 @@
   box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
 }
 
-.verify-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+.verify-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.verify-resend {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.verify-resend:disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.verify-message {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.verify-message.success {
+  color: #059669;
+}
+
+.verify-message.error {
+  color: #dc2626;
 }
 
 @keyframes fadeInUp {
@@ -79,8 +135,8 @@
     font-size: 22px;
   }
 
-  .verify-btn {
+  .verify-form input {
     font-size: 15px;
-    padding: 13px;
+    letter-spacing: 3px;
   }
 }

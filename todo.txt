@@ -1,13 +1,12 @@
-4. Zrobić mechanizm potwierdzania e-mail podczas rejestracji
-
-6. Zrobić mechanizm przypominania hasła
-
-7. Zrobić stronę edytowania profilu (zmiana nazwy użytkownika, email i hasła)
+6. Zrobić stronę edytowania profilu (zmiana nazwy użytkownika, email i hasła)
 
 9. Zrobić stronę portfeli inwestycyjnych
 
 10. Zrobić stronę dla portfela inwestycyjnego
 
-11. Zrobić mechanizm zapisanego JSON WEB tokenu aby nie wywalalo z sesji po godzinie lub wylogowywać po nieaktywności na stronie
+11. Zrobić arytykuł o budowie portfela inwestycyjnego opartego na stworzonym narzędziu aplikacji 
 
-12. Zrobić arytykuł o budowie portfela inwestycyjnego opartego na stworzonym narzędziu aplikacji 
+Na spokojnie:
+7. Zrobić mechanizm przypominania hasła
+
+12. Zrobić mechanizm zapisanego JSON WEB tokenu aby nie wywalalo z sesji po godzinie lub wylogowywać po nieaktywności na stronie
