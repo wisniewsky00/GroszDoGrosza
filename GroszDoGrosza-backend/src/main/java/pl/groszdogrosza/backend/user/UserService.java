@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import pl.groszdogrosza.backend.dto.LoginRequest;
 import pl.groszdogrosza.backend.dto.LoginResponse;
 import pl.groszdogrosza.backend.dto.RegisterRequest;
+import pl.groszdogrosza.backend.exception.EmailNotVerifiedException;
 import pl.groszdogrosza.backend.service.JwtService;
+import pl.groszdogrosza.backend.verification.VerificationService;
+
 import java.util.Map;
 
 @Service
@@ -20,14 +23,16 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
-  private JwtService jwtService;
+  private final JwtService jwtService;
+  private final VerificationService verificationService;
 
   @Autowired
-  public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtService jwtService) {
+  public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtService jwtService, VerificationService verificationService) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.authenticationManager = authenticationManager;
     this.jwtService = jwtService;
+    this.verificationService = verificationService;
   }
 
   public ResponseEntity<?> register(RegisterRequest registerRequest) {
@@ -45,7 +50,9 @@ public class UserService {
     user.setEmail(registerRequest.getEmail());
     user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
     user.setRole("USER");
+    user.setEmailVerified(false);
     userRepository.save(user);
+    verificationService.createAndSendCode(user);
 
     return ResponseEntity.ok(new LoginResponse(user, jwtService.generateToken(user.getEmail())));
   }
@@ -60,6 +67,10 @@ public class UserService {
 
     User user = userRepository.findByEmail(loginRequest.getEmail())
       .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+    if (!user.getEmailVerified()) {
+      throw new EmailNotVerifiedException("EMAIL_NOT_VERIFIED");
+    }
 
     String token = jwtService.generateToken(user.getEmail());
     return ResponseEntity.ok(new LoginResponse(user, token));

@@ -40,7 +40,7 @@ public class User {
   private String role;
 
   @Column(name = "email_verified", nullable = false)
-  private boolean emailVerified;
+  private Boolean emailVerified;
 
   @PrePersist
   protected void onCreate() {
@@ -51,4 +51,5 @@ public class User {
   public Collection<SimpleGrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
   }
+
 }
