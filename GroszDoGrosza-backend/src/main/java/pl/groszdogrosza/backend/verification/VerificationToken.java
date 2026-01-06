@@ -22,12 +22,16 @@ public class VerificationToken {
     private User user;
 
     @Column(name = "code", nullable = false, length = 64)
-    private String code; // możesz trzymać plain 6-digit lub hashed
+    private String code;
+
+    @Column(name = "pending_email", length = 320)
+    private String pendingEmail;
 
     @Column(name = "expires_at", nullable = false)
     private LocalDateTime expiresAt;
 
     @Column(name = "used", nullable = false)
+    @Builder.Default
     private Boolean used = false;
 
     @Column(name = "created_at")

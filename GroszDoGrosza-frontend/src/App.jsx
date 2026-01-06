@@ -9,6 +9,7 @@ import { AuthenticatedLayout } from "./layouts/AuthenticatedLayout";
 import { ArticlePage } from "./pages/articles/ArticlePage";
 import ScrollToTop from "./components/ScrollToTop";
 import { VerifyEmailPage } from "./pages/register/VerifyEmailPage";
+import { EditProfile } from "./pages/profile/EditProfile";
 
 export default function App() {
 
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/articles" element={<ArticlesPage />} >
               <Route path=":slug" element={<ArticlePage />}/>
             </Route>
+            <Route path="/profile/edit" element={<EditProfile />} />
           </Route>
         </Routes>
 
