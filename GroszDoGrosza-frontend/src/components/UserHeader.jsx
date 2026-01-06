@@ -5,12 +5,13 @@ import DownArrow from '../assets/images/icons/down-arrow.png';
 import UpArrow from '../assets/images/icons/up-arrow.png';
 import { useState } from 'react';
 import { useAuth } from '../auth/useAuth';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 export function UserHeader() {
 
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="dashboard-header">
@@ -28,7 +29,7 @@ export function UserHeader() {
         </div>
 
         <div className={`dropdown-menu ${open ? "open" : ""}`}>
-          <p>Edytuj profil</p>
+          <p onClick={() => { navigate('/profile/edit'); setOpen(false); }}>Edytuj profil</p>
           <button className="logout-btn" onClick={logout}>Wyloguj</button>
         </div>
       </div>

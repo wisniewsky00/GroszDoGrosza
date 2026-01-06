@@ -1,9 +1,9 @@
-import { useState } 
-from "react";
+import { useState }
+  from "react";
 import { backendApi } from "../services/backendApi";
 import { AuthContext } from "./AuthContext";
 
-export function AuthProvider( {children} ) {
+export function AuthProvider({ children }) {
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
@@ -33,7 +33,7 @@ export function AuthProvider( {children} ) {
       password
     })
 
-    const {user, token} = response.data;
+    const { user, token } = response.data;
     setUser(user);
     setToken(token);
     localStorage.setItem("user", JSON.stringify(user));
@@ -47,8 +47,19 @@ export function AuthProvider( {children} ) {
     localStorage.clear();
   }
 
+  async function refreshUser() {
+    const response = await backendApi.get("/users/me", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+
+    setUser(response.data);
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+
   return (
-    <AuthContext.Provider value={{user, token, register, login, logout}}>
+    <AuthContext.Provider value={{ user, token, register, login, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );
