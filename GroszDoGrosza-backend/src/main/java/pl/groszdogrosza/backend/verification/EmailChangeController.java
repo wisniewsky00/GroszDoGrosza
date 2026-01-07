@@ -24,6 +24,9 @@ public class EmailChangeController {
         this.userRepo = userRepo;
     }
 
+    /* =========================
+       helper – pobranie emaila
+       ========================= */
     private String getCurrentEmail() {
         Authentication auth = SecurityContextHolder
                 .getContext()
@@ -36,6 +39,9 @@ public class EmailChangeController {
         return auth.getName(); // subject z JWT = email
     }
 
+    /* =========================
+       1️⃣ request code
+       ========================= */
     @PostMapping("/request")
     public ResponseEntity<?> requestEmailChange(
             @RequestBody Map<String, String> body
@@ -68,6 +74,9 @@ public class EmailChangeController {
         return ResponseEntity.ok().build();
     }
 
+    /* =========================
+       2️⃣ verify code
+       ========================= */
     @PostMapping("/verify")
     public ResponseEntity<?> verifyEmailChange(
             @RequestBody Map<String, String> body
