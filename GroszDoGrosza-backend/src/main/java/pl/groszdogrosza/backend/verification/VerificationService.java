@@ -3,7 +3,6 @@ package pl.groszdogrosza.backend.verification;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -29,8 +28,16 @@ public class VerificationService {
 
     @Transactional
     public void createAndSendCode(User user) {
-
         tokenRepo.deleteAllByUser(user);
+        String codeStr = generate6Digit();
+
+        VerificationToken token = VerificationToken.builder()
+                .user(user)
+                .code(codeStr)
+                .expiresAt(LocalDateTime.now().plusMinutes(15))
+                .used(false)
+                .pendingEmail(null)
+                .build();
 
         tokenRepo.save(token);
         sendVerificationMail(user.getEmail(), codeStr);
@@ -44,21 +51,16 @@ public class VerificationService {
         VerificationToken token = VerificationToken.builder()
                 .user(user)
                 .code(codeStr)
+                .pendingEmail(newEmail) // store target email
                 .expiresAt(LocalDateTime.now().plusMinutes(15))
                 .used(false)
                 .build();
 
         tokenRepo.save(token);
 
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
-
-            helper.setTo(user.getEmail());
-            helper.setSubject("Potwierdź adres e-mail – GroszDoGrosza");
-
-            helper.setText(
-            """
+        // Send to CURRENT (existing) email address
+        String subject = "Potwierdź zmianę e-maila – GroszDoGrosza";
+        String body = """
               <div style="font-family: Arial, sans-serif; line-height: 1.6">
                 <h2>Zmiana adresu e-mail</h2>
                 <p>Otrzymałeś prośbę o zmianę adresu e-mail na: <strong>%s</strong></p>
@@ -70,6 +72,7 @@ public class VerificationService {
                 <p>Pozdrawiamy<br/><strong>Zespół GroszDoGrosza</strong></p>
               </div>""".formatted(newEmail, codeStr);
 
+        sendHtmlMail(user.getEmail(), subject, body);
     }
 
     @Transactional
