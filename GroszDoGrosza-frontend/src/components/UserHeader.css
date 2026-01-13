@@ -57,6 +57,7 @@
 }
 
 .dropdown-menu {
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -85,6 +86,8 @@
 }
 
 .dropdown-menu.open {
+  pointer-events: auto;
+  
   opacity: 1;
   transform: translateY(0);
   max-height: 200px;

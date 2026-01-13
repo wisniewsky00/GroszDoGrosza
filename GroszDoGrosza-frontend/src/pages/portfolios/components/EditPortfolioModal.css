@@ -1,0 +1,49 @@
+/* doprecyzowanie karty (reuse portfolio-modal) */
+.edit-portfolio-modal {
+  max-width: 560px;
+}
+
+/* sekcja akcji */
+.edit-portfolio-modal .modal-actions.split {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* przycisk USUŃ — secondary danger */
+.edit-portfolio-modal .danger-btn {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #fecaca;
+  background: #fff;
+  color: #991b1b;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+/* hover */
+.edit-portfolio-modal .danger-btn:hover {
+  background: #fee2e2;
+  box-shadow: 0 6px 16px rgba(153, 27, 27, 0.18);
+  transform: translateY(-1px);
+}
+
+/* active */
+.edit-portfolio-modal .danger-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(153, 27, 27, 0.22);
+}
+
+/* disabled */
+.edit-portfolio-modal .danger-btn:disabled,
+.edit-portfolio-modal .save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -53,6 +53,66 @@
   border-color: #6366f1;
 }
 
+.input.error {
+  border-color: #dc2626;
+}
+
+.input.error:focus {
+  outline: none;
+  border-color: #dc2626;
+}
+
+.input-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: -7px;
+  text-align: left;
+}
+
+.error-box {
+  padding: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 38px;
+}
+
+.toogle-password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 3px;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.toogle-password:hover {
+  background: #f3f4f6;
+}
+
+.toogle-password img {
+  height: 24px;
+  width: 24px;
+}
+
 .register-btn {
   margin: 20px auto 0 auto;
   padding: 12px 20px;

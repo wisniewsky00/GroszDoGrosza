@@ -180,7 +180,7 @@ export function EmailChangeSection({ user, token }) {
       {!isEditing && (
         <>
           <div className="email-note">
-            Zmiana adresu e-mail wymaga ponownego logowania.
+            Zmiana adresu e-mail wymaga ponownego zalogowania.
           </div>
 
           <button className="save-btn" onClick={handleEditEmail}>

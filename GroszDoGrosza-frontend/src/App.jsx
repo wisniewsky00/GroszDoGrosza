@@ -10,6 +10,8 @@ import { ArticlePage } from "./pages/articles/ArticlePage";
 import ScrollToTop from "./components/ScrollToTop";
 import { VerifyEmailPage } from "./pages/register/VerifyEmailPage";
 import { EditProfile } from "./pages/profile/EditProfile";
+import { PortfoliosPage } from "./pages/portfolios/PortfoliosPage";
+import { PortfolioDetailPage } from './pages/portfolios/PortfolioDetailPage'
 
 export default function App() {
 
@@ -30,10 +32,12 @@ export default function App() {
 
           <Route element={<AuthenticatedLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/articles" element={<ArticlesPage />} >
               <Route path=":slug" element={<ArticlePage />}/>
             </Route>
-            <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/portfolios" element={<PortfoliosPage />} />
+            <Route path="/portfolios/:id" element={<PortfolioDetailPage />} />
           </Route>
         </Routes>
 

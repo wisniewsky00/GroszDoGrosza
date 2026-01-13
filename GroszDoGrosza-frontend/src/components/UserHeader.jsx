@@ -20,10 +20,12 @@ export function UserHeader() {
           <img className="logo" src={Logo} />
         </Link>
       </div>
-      <div className="right-section" onClick={() => setOpen(!open)}>
+      <div className="right-section">
         <img className="user-avatar" src={UserAvatar} />
 
-        <div className="username-container">
+        <div className="username-container"
+          onClick={() => setOpen(prev => !prev)}
+        >
           <p className="username">{user.username}</p>
           {open ? <img className="up-arrow" src={UpArrow} /> : <img className="down-arrow" src={DownArrow} />}
         </div>

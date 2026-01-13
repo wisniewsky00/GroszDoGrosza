@@ -1,0 +1,86 @@
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  margin-top: 120px;
+  margin-left: 25px;
+}
+
+.portfolio-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.portfolio-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.portfolio-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #6b7280;
+  max-width: 640px;
+}
+
+.edit-btn {
+  margin-right: 50px;
+  padding: 13px 17px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #2FAF6E, #1f9d5a);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(47, 175, 110, 0.22);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(47, 175, 110, 0.28);
+}
+
+.edit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(47, 175, 110, 0.20);
+}
+
+@media (max-width: 640px) {
+  .portfolio-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .portfolio-header-text {
+    width: 100%;
+  }
+
+  .portfolio-header h1 {
+    font-size: 22px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .portfolio-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b7280;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .edit-btn {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 14px 18px;
+    font-size: 16px;
+  }
+}

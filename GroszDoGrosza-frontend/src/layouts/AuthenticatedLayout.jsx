@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 import { isTokenExpired } from "../utils/jwtUtils";
 import { UserHeader } from "../components/UserHeader";
@@ -13,7 +13,7 @@ export function AuthenticatedLayout() {
       if (token && isTokenExpired(token)) {
         logout();
       }
-    }, 1000 * 60 * 5);
+    }, 10_000);
 
     return () => clearInterval(interval);
   }, [token, logout]);
