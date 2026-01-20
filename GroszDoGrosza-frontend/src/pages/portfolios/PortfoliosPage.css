@@ -54,7 +54,6 @@
   box-shadow: 0 4px 12px rgba(47, 175, 110, 0.35);
 }
 
-
 .page-content {
   margin-top: 12px;
 }
@@ -101,7 +100,6 @@
   -webkit-backdrop-filter: blur(3px);
 }
 
-/* główna karta modala */
 .portfolio-modal {
   width: 100%;
   max-width: 560px;
@@ -160,6 +158,8 @@
 }
 
 .portfolio-modal .input-label {
+  display: flex;
+  align-items: center;
   margin-top: 14px;
   margin-bottom: 12px;
   font-size: 13px;

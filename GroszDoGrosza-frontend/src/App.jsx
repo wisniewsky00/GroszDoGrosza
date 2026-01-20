@@ -11,7 +11,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { VerifyEmailPage } from "./pages/register/VerifyEmailPage";
 import { EditProfile } from "./pages/profile/EditProfile";
 import { PortfoliosPage } from "./pages/portfolios/PortfoliosPage";
-import { PortfolioDetailPage } from './pages/portfolios/PortfolioDetailPage'
+import { PortfolioDetailPage } from "./pages/portfolios/portfolio/PortfolioDetailPage"
 
 export default function App() {
 

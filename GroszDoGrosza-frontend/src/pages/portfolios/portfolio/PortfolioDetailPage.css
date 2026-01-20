@@ -1,0 +1,45 @@
+.portfolio-detail-page {
+  padding-bottom: 200px;
+}
+
+.portfolio-section {
+  margin-top: 36px;
+}
+
+.section-title {
+  margin-top: 80px;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(15, 23, 36);
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.composition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 35px 45px;
+}
+
+.portfolio-value-card {
+  max-width: 1400px;
+  margin: 70px auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow:
+    0 12px 32px rgba(2, 6, 23, 0.08),
+    0 4px 12px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .composition-grid {
+    grid-template-columns: 1fr;
+  }
+}
