@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
     List<Portfolio> findAllByOwnerId(Long ownerId);
+    Portfolio findPortfoliosById(Long id);
 }
