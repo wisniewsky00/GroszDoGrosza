@@ -98,6 +98,17 @@
   color: #0f172a;
 }
 
+.article-images-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.article-images-row .article-image {
+  flex: 1;
+  max-width: 40%;
+}
+
 @media (max-width: 600px) {
   .back-link {
     display: none;

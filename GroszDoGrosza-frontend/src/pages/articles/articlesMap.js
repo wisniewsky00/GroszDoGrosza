@@ -13,6 +13,7 @@ import { DirectInvesting } from './content/DirectInvesting';
 import { IndirectInvesting } from './content/IndirectInvesting';
 import InvestmentPreferences from './content/InvestmentPreferences';
 import BrokerageAccount from './content/BrokerageAccount';
+import PortfolioConstruction from './content/PorfolioConstruction';
 
 export const articlesMap = {
   "etf-funds": {
@@ -59,5 +60,8 @@ export const articlesMap = {
   },
   "brokerage-account": {
     component: BrokerageAccount
+  },
+  "portfolio-construction": {
+    component: PortfolioConstruction
   }
 }
