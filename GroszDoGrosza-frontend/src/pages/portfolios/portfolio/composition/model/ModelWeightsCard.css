@@ -1,0 +1,12 @@
+.composition-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.composition-card-header .edit-btn {
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-right: 10px;
+}
