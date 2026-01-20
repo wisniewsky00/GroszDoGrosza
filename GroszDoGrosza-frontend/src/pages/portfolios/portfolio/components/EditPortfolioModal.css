@@ -47,3 +47,13 @@
   transform: none;
   box-shadow: none;
 }
+
+@media (max-width: 640px) {
+  .edit-portfolio-modal .modal-actions.split {
+    flex-direction: column;
+  }
+
+  .edit-portfolio-modal .modal-actions.split button {
+    width: 100%;
+  }
+}

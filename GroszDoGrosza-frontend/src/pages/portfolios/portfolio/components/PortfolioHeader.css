@@ -10,7 +10,7 @@
 .portfolio-header h1 {
   font-size: 26px;
   font-weight: 700;
-  color: #111827;
+  color: rgb(15, 23, 36);
   margin: 0;
 }
 
@@ -26,6 +26,17 @@
   line-height: 1.4;
   color: #6b7280;
   max-width: 640px;
+}
+
+.portfolio-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portfolio-diff {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .edit-btn {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { backendApi } from "../../../services/backendApi";
-import { useAuth } from "../../../auth/useAuth";
+import { backendApi } from "../../../../services/backendApi";
+import { useAuth } from "../../../../auth/useAuth";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 import "./EditPortfolioModal.css";
 
