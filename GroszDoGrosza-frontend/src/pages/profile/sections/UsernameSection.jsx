@@ -102,7 +102,13 @@ export function UsernameSection({ user, token, refreshUser }) {
         value={isEditing ? formUsername : username}
         disabled={!isEditing}
         onChange={(e) => {
-          setFormUsername(e.target.value);
+          const value = e.target.value;
+
+          if (!/^[a-zA-Z0-9]*$/.test(value)) return;
+
+          if (value.length > 12) return;
+
+          setFormUsername(value);
           if (error) setError("");
         }}
         onBlur={() => {
