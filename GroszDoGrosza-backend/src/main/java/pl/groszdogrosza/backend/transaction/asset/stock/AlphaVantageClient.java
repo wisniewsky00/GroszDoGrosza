@@ -72,7 +72,10 @@ public class AlphaVantageClient {
 
             if (quote == null) return Optional.empty();
 
-            return Optional.of(new BigDecimal(quote.get("05. price")));
+            String priceStr = quote.get("05. price");
+            if (priceStr == null) return Optional.empty();
+
+            return Optional.of(new BigDecimal(priceStr));
 
         } catch (Exception e) {
             log.warn("Price fetch failed", e);

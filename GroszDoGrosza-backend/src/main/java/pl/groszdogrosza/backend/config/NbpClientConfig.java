@@ -13,7 +13,7 @@ public class NbpClientConfig {
     RestClient nbpRestClient() {
         return RestClient.builder()
                 .baseUrl("http://api.nbp.pl/api")
-                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML_VALUE)
                 .build();
     }
 }
