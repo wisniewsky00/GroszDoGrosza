@@ -1,0 +1,42 @@
+.portfolio-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 18px 24px;
+  margin-bottom: 34px;
+
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+}
+
+.portfolio-stats .label {
+  font-size: 13px;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.portfolio-stats strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.value-positive {
+  color: #16a34a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.value-negative {
+  color: #dc2626;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+@media (max-width: 640px) {
+  .portfolio-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

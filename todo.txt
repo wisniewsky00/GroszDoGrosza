@@ -1,12 +1,9 @@
-6. Zrobić stronę edytowania profilu (zmiana nazwy użytkownika, email i hasła)
+Ważne:
+2. Zrobić arytykuł o budowie portfela inwestycyjnego opartego na stworzonym narzędziu aplikacji 
 
-9. Zrobić stronę portfeli inwestycyjnych
-
-10. Zrobić stronę dla portfela inwestycyjnego
-
-11. Zrobić arytykuł o budowie portfela inwestycyjnego opartego na stworzonym narzędziu aplikacji 
+3. Zrobić mechanizm zapisanego JSON WEB tokenu aby nie wywalalo z sesji po godzinie lub wylogowywać po nieaktywności na stronie
 
 Na spokojnie:
-7. Zrobić mechanizm przypominania hasła
+1. Zrobić mechanizm przypominania hasła
 
-12. Zrobić mechanizm zapisanego JSON WEB tokenu aby nie wywalalo z sesji po godzinie lub wylogowywać po nieaktywności na stronie
+2. Zrobić sortowanie transakcji po dacie, kwocie zakupu, wartości aktualnej (narazie jest tylko po typie aktywa) 
