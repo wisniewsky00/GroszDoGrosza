@@ -1,9 +1,8 @@
-package pl.groszdogrosza.backend.controller;
+package pl.groszdogrosza.backend.contact;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.groszdogrosza.backend.dto.ContactRequest;
-import pl.groszdogrosza.backend.service.ContactMailService;
 
 @RestController
 @RequestMapping("/api/contact")

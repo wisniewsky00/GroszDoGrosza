@@ -1,4 +1,4 @@
-package pl.groszdogrosza.backend.service;
+package pl.groszdogrosza.backend.contact;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
