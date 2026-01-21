@@ -30,9 +30,8 @@ export function StockFields({
     setSuggestions([]);
 
     try {
-      const res = await backendApi.get("/assets/stocks/search", {
-        params: { q: query },
-      });
+      const res = await backendApi.get("/assets/stocks/search");
+
       setSuggestions(res.data ?? []);
     } finally {
       setLoading(false);
@@ -45,6 +44,15 @@ export function StockFields({
 
     try {
       const res = await backendApi.get(`/assets/stocks/${s.symbol}/price`);
+
+      if (!res.data?.fromApi || !res.data?.pricePln) {
+        onChange({
+          ...value,
+          symbol: s.symbol,
+          name: s.name,
+        });
+        return;
+      }
 
       onChange({
         ...value,
