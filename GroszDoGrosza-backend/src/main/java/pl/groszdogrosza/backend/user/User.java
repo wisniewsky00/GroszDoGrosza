@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import pl.groszdogrosza.backend.portfolio.Portfolio;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -51,5 +52,12 @@ public class User {
   public Collection<SimpleGrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
   }
+
+  @OneToMany(
+          mappedBy = "owner",
+          cascade = CascadeType.ALL,
+          orphanRemoval = true
+  )
+  private List<Portfolio> portfolios;
 
 }
