@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.groszdogrosza.backend.dto.CurrencyRateResult;
 
+import java.math.RoundingMode;
+
 @Service
 @RequiredArgsConstructor
 public class CurrencyService {
@@ -27,6 +29,7 @@ public class CurrencyService {
         }
 
         return currencyClient.getRateToPln(from)
+                .map(rate -> rate.setScale(2, RoundingMode.HALF_UP))
                 .map(rate -> CurrencyRateResult.api(from, to, rate))
                 .orElseGet(() ->
                         CurrencyRateResult.fallback(
