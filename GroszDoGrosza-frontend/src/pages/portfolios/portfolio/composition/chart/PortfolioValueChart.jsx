@@ -12,10 +12,10 @@ export function PortfolioValueChart({ transactions, modelWeights, currentValues 
   const stats = usePortfolioStats(transactions, currentValues);
 
   const formatPLN2 = (value) =>
-  new Intl.NumberFormat("pl-PL", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
+    new Intl.NumberFormat("pl-PL", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
 
 
   return (
@@ -59,7 +59,16 @@ export function PortfolioValueChart({ transactions, modelWeights, currentValues 
   );
 
   function PortfolioStatsSummary({ invested, current, diffPercent }) {
-    const positive = diffPercent >= 0;
+
+    const normalizedDiff = Number(diffPercent.toFixed(2)) || 0;
+
+    const diffState =
+      normalizedDiff > 0
+        ? "value-positive"
+        : normalizedDiff < 0
+          ? "value-negative"
+          : "value-neutral";
+
 
     return (
       <div className="portfolio-stats">
@@ -73,10 +82,10 @@ export function PortfolioValueChart({ transactions, modelWeights, currentValues 
           <strong>{formatPLN2(current.toFixed(2))} zł</strong>
         </div>
 
-        <div className={positive ? "value-positive" : "value-negative"}>
+        <div className={`${diffState}`}>
           <span className="label">Zmiana wartości</span>
-          {positive ? "+" : ""}
-          {diffPercent.toFixed(2)}%
+          {normalizedDiff > 0 ? "+" : ""}
+          {normalizedDiff.toFixed(2)}%
         </div>
       </div>
     );
