@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import "../gold/GoldFields.css";
 
 const BOND_PRICE = 100;
@@ -27,7 +27,7 @@ export function BondFields({
   const {
     bondType = "",
     bondName = "",
-    bondSymbolSuffix = "", // tylko cyfry, np. 0130
+    bondSymbolSuffix = "",
     interestRate = "",
     firstYearRate = "",
     margin = "",
@@ -38,23 +38,32 @@ export function BondFields({
     currentValue = "",
   } = value;
 
+  const prevAmountRef = useRef(null);
+
   useEffect(() => {
     if (!isPositive(amount)) return;
+
+    if (prevAmountRef.current === null) {
+      prevAmountRef.current = amount;
+      return;
+    }
+
+    if (prevAmountRef.current === amount) return;
 
     const autoValue = (Number(amount) * BOND_PRICE).toFixed(2);
 
     onValueCalculated?.(autoValue);
 
-    // wypełnij wartość aktualną tylko jeśli użytkownik jej nie ruszył
     onChange({
       ...value,
       currentValue: autoValue,
     });
 
+    prevAmountRef.current = amount;
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
-  /* ===== HELPERS ===== */
 
   const isPositive = (v) => {
     const n = Number(v);
@@ -65,8 +74,6 @@ export function BondFields({
     ? `${bondName}${bondSymbolSuffix}`
     : "";
 
-  /* ===== AUTO VALUE CALC ===== */
-
   const calculatedValue = useMemo(() => {
     if (!isPositive(amount)) return "";
     return (Number(amount) * BOND_PRICE).toFixed(2);
@@ -76,11 +83,8 @@ export function BondFields({
     onValueCalculated?.(calculatedValue || "");
   }, [calculatedValue, onValueCalculated]);
 
-  /* ===== UI ===== */
-
   return (
     <>
-      {/* === TYPE + NAME === */}
       <div className="weights-row">
         <div className="weights-field">
           <label className="input-label">Typ obligacji</label>
@@ -164,7 +168,6 @@ export function BondFields({
         )}
       </div>
 
-      {/* === INTEREST DETAILS === */}
       <div className="weights-row">
 
         {bondType === "INFLATION" && (
@@ -213,7 +216,6 @@ export function BondFields({
         )}
       </div>
 
-      {/* === CAPITALIZATION & PAYOUT === */}
       <div className="weights-row">
         <div className="weights-field">
           <label className="input-label">Kapitalizacja odsetek</label>
@@ -249,7 +251,6 @@ export function BondFields({
         </div>
       </div>
 
-      {/* === AMOUNT + CURRENT VALUE === */}
       <div className="weights-row">
         <div className="weights-field">
           <label className="input-label">Ilość obligacji</label>
