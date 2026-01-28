@@ -3,7 +3,15 @@ import "./PortfolioHeader.css";
 export function PortfolioHeader({ name, description, onEdit, diffPercent }) {
 
   const hasDiff = typeof diffPercent === "number";
-  const positive = hasDiff && diffPercent >= 0;
+  const normalizedDiff = Number(diffPercent.toFixed(2)) || 0;
+
+  const diffState = !hasDiff
+    ? null
+    : normalizedDiff > 0
+      ? "value-positive"
+      : normalizedDiff < 0
+        ? "value-negative"
+        : "value-neutral";
 
   return (
     <div className="portfolio-header">
@@ -15,13 +23,11 @@ export function PortfolioHeader({ name, description, onEdit, diffPercent }) {
           {hasDiff && (
             <span
               className={
-                positive
-                  ? "portfolio-diff value-positive"
-                  : "portfolio-diff value-negative"
+                `portfolio-diff ${diffState}`
               }
             >
-              {positive ? "+" : ""}
-              {diffPercent.toFixed(2)}%
+              {normalizedDiff > 0 ? "+" : ""}
+              {normalizedDiff.toFixed(2)}%
             </span>
           )}
 

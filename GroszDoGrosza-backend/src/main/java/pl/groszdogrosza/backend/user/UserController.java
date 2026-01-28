@@ -1,12 +1,15 @@
 package pl.groszdogrosza.backend.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import pl.groszdogrosza.backend.dto.UserMeDto;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -21,13 +24,14 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> me(Authentication auth) {
-        if (auth == null) return ResponseEntity.status(401).build();
-        return ResponseEntity.ok(
-                userRepository.findByEmail(auth.getName()).orElseThrow()
-        );
-    }
+    public ResponseEntity<UserMeDto> me(Authentication auth) {
+        if (auth == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
+        return userRepository.findByEmail(auth.getName())
+                .map(UserMeDto::from)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 
     @PatchMapping("/username")
     public ResponseEntity<?> updateUsername(@RequestBody Map<String,String> body, Authentication auth) {

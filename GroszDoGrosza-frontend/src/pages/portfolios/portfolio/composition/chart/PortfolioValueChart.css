@@ -33,6 +33,11 @@
   font-weight: 700;
 }
 
+.value-neutral {
+  color: #6b7280;
+  font-size: 18px;
+  font-weight: 700;
+}
 
 @media (max-width: 640px) {
   .portfolio-stats {
