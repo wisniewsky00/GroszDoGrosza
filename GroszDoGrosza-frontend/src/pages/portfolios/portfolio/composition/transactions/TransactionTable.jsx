@@ -7,6 +7,7 @@ import { AssetDetails } from "./assets/AssetDetails";
 import { ConfirmDeleteModal } from "../../components/ConfirmDeleteModal";
 import { useGoldCurrentValue } from "./assets/gold/useGoldCurrentValue";
 import { useCryptoCurrentValue } from "./assets/crypto/useCryptoCurrentValue";
+import CalendarIcon from "../../../../../assets/images/icons/calendar.png";
 import './TransactionTable.css';
 
 const formatPLN2 = (value) =>
@@ -14,6 +15,16 @@ const formatPLN2 = (value) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);
+
+const SortIcon = ({ active, order }) => {
+  if (!active) return <span className="sort-icon muted">⇅</span>;
+  return (
+    <span className="sort-icon active">
+      {order === "asc" ? "↑" : "↓"}
+    </span>
+  );
+};
+
 
 export function TransactionsTable({ transactions = [], modelWeights, disabled, onCreate, onUpdate, onDelete, portfolioId }) {
   const { token } = useAuth();
@@ -24,16 +35,132 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
   const [deleteId, setDeleteId] = useState(null);
   const [editingTx, setEditingTx] = useState(null);
 
-  const filtered = useMemo(() => {
-    return localRows.filter((t) => {
-      if (filterAsset && t.asset !== filterAsset) return false;
-      return true;
-    });
-  }, [localRows, filterAsset]);
+
+  const [sortKey, setSortKey] = useState("date");
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   useEffect(() => {
     setLocalRows(transactions);
   }, [transactions]);
+
+  const getCurrentValueForSort = (tx) => {
+    if (!tx) return null;
+    const m = tx.metadata || {};
+
+    try {
+      switch (tx.asset) {
+        case "AKCJE": {
+          const a = Number(m.amount);
+          const p = Number(m.currentPrice);
+          if (!a || !p) return null;
+          return a * p;
+        }
+        case "KRYPTOWALUTY": {
+          const a = Number(m.amount);
+          const p = Number(m.pricePln);
+          if (!a || !p) return null;
+          return a * p;
+        }
+        case "OBLIGACJE_SKARBOWE": {
+          const cv = Number(m.currentValue);
+          if (!cv) return null;
+          return cv;
+        }
+        case "ZLOTO": {
+          const amount = Number(m.amount);
+          const pricePerGram = Number(m.pricePerGram);
+          if (!amount || !pricePerGram) return null;
+          const OZ_TO_GRAMS = 31.1034768;
+          const grams = m.unit === "oz" ? amount * OZ_TO_GRAMS : amount;
+          return grams * pricePerGram;
+        }
+        case "NIERUCHOMOSCI": {
+          const area = Number(m.areaM2);
+          const currentP = Number(m.currentPricePerM2);
+          if (!area || !currentP) return null;
+          return area * currentP;
+        }
+        default:
+          return null;
+      }
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
+  const sorted = useMemo(() => {
+    const arr = [...localRows];
+
+    const cmp = (a, b) => {
+      let av, bv;
+
+      switch (sortKey) {
+        case "date":
+          av = new Date(a.transactionDate ?? a.createdAt).getTime();
+          bv = new Date(b.transactionDate ?? b.createdAt).getTime();
+          break;
+
+        case "type":
+          av = a.type ?? "";
+          bv = b.type ?? "";
+          break;
+
+        case "asset":
+          av = a.asset ?? "";
+          bv = b.asset ?? "";
+          break;
+
+        case "value":
+          av = Number(a.value) || 0;
+          bv = Number(b.value) || 0;
+          break;
+
+        case "current":
+          av = getCurrentValueForSort(a);
+          bv = getCurrentValueForSort(b);
+          if (av == null && bv == null) return 0;
+          if (av == null) return 1;
+          if (bv == null) return -1;
+          break;
+
+        default:
+          av = 0; bv = 0;
+      }
+      if (typeof av === "string") av = av.toLowerCase();
+      if (typeof bv === "string") bv = bv.toLowerCase();
+
+      if (av < bv) return -1;
+      if (av > bv) return 1;
+      return 0;
+    };
+
+    arr.sort((a, b) => {
+      const r = cmp(a, b);
+      return sortOrder === "asc" ? r : -r;
+    });
+
+    return arr;
+  }, [localRows, sortKey, sortOrder]);
+
+  const filtered = useMemo(() => {
+    return sorted.filter((t) => {
+      if (filterAsset && t.asset !== filterAsset) return false;
+
+      const txDate = new Date(
+        t.transactionDate ?? t.createdAt
+      ).toISOString().slice(0, 10);
+
+      if (dateFrom && txDate < dateFrom) return false;
+      if (dateTo && txDate > dateTo) return false;
+
+      return true;
+    });
+  }, [sorted, filterAsset, dateFrom, dateTo]);
 
   const isValueValid = (v) => {
     if (v === "" || v === null || v === undefined) return false;
@@ -42,7 +169,6 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
   };
 
   const createTransaction = async (payload) => {
-
     try {
       const res = await backendApi.post(`/portfolios/${portfolioId}/transactions`, payload, {
         headers: { Authorization: `Bearer ${token || localStorage.getItem("token")}` },
@@ -97,6 +223,15 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
     );
   }
 
+  const onHeaderClick = (key) => {
+    if (sortKey === key) {
+      setSortOrder(prev => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortOrder(key === "date" || key === "value" || key === "current" ? "desc" : "asc");
+    }
+  };
+
   return (
     <div className="transaction-container">
       <div className="transactions-section">
@@ -122,11 +257,91 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
           <table className="transactions-table">
             <thead>
               <tr>
-                <th>Data</th>
-                <th>Typ</th>
-                <th>Typ aktywa</th>
-                <th>Kwota transakcji</th>
-                <th>Wartość aktualna</th>
+                <th className="th-date">
+                  <span onClick={() => onHeaderClick("date")}>
+                    Data{" "}
+                    <SortIcon
+                      active={sortKey === "date"}
+                      order={sortOrder}
+                    />
+                  </span>
+
+                  <button
+                    className="date-filter-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDatePickerOpen(v => !v);
+                    }}
+                    aria-label="Filtruj po dacie"
+                  >
+                    <img
+                      src={CalendarIcon}
+                      alt=""
+                      className={`calendar-icon ${(dateFrom || dateTo) ? "active" : ""}`}
+                    />
+                  </button>
+
+
+                  {datePickerOpen && (
+                    <div className="date-filter-popover">
+                      <label>
+                        Od:
+                        <input
+                          type="date"
+                          value={dateFrom}
+                          onChange={(e) => setDateFrom(e.target.value)}
+                        />
+                      </label>
+
+                      <label>
+                        Do:
+                        <input
+                          type="date"
+                          value={dateTo}
+                          onChange={(e) => setDateTo(e.target.value)}
+                        />
+                      </label>
+
+                      <button
+                        className="clear-btn"
+                        onClick={() => {
+                          setDateFrom("");
+                          setDateTo("");
+                        }}
+                      >
+                        Wyczyść
+                      </button>
+                    </div>
+                  )}
+                </th>
+                <th onClick={() => onHeaderClick("type")}>
+                  Typ{" "}
+                  <SortIcon
+                    active={sortKey === "type"}
+                    order={sortOrder}
+                  />
+                </th>
+                <th onClick={() => onHeaderClick("asset")}>
+                  Typ aktywa{" "}
+                  <SortIcon
+                    active={sortKey === "asset"}
+                    order={sortOrder}
+                  />
+                </th>
+                <th onClick={() => onHeaderClick("value")}>
+                  Kwota transakcji{" "}
+                  <SortIcon
+                    active={sortKey === "value"}
+                    order={sortOrder}
+                  />
+                </th>
+                <th onClick={() => onHeaderClick("current")}>
+                  Wartość atkualna{" "}
+                  <SortIcon
+                    active={sortKey === "current"}
+                    order={sortOrder}
+                  />
+                </th>
                 <th>Szczegóły</th>
                 <th>Akcje</th>
               </tr>
