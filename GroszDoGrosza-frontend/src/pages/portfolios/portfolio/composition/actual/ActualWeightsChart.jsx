@@ -55,16 +55,43 @@ export function ActualWeightsChart({
     const totalsLocal = {};
     let sumLocal = 0;
 
-    transactions.forEach((tx) => {
-      const byId = currentValues?.[tx.id];
-      const byAsset = currentValues?.[tx.asset];
-      const raw = byId ?? byAsset ?? tx.value ?? 0;
-      const current = Number(raw);
+    const buys = transactions.filter(t => t.type === "BUY");
+    const sells = transactions.filter(t => t.type === "SELL");
 
-      if (!Number.isFinite(current) || current <= 0) return;
+    const sellsByBuy = {};
+    sells.forEach(s => {
+      if (!s.sourceTransactionId) return;
+      sellsByBuy[s.sourceTransactionId] = sellsByBuy[s.sourceTransactionId] || [];
+      sellsByBuy[s.sourceTransactionId].push(s);
+    });
 
-      totalsLocal[tx.asset] = (totalsLocal[tx.asset] || 0) + current;
-      sumLocal += current;
+    const isQuantityAsset = (asset) =>
+      ["AKCJE", "KRYPTOWALUTY", "OBLIGACJE_SKARBOWE"].includes(asset);
+
+    buys.forEach(buy => {
+      const id = buy.id;
+      const asset = buy.asset;
+      const rawCurrent = currentValues?.[id] ?? currentValues?.[asset] ?? buy.value ?? 0;
+      let currentNum = Number(rawCurrent);
+      if (!Number.isFinite(currentNum) || currentNum <= 0) return;
+
+      if (isQuantityAsset(asset)) {
+        const buyAmount = Number(buy.metadata?.amount) || 0;
+        const sold = (sellsByBuy[id] || [])
+          .reduce((acc, s) => acc + (Number(s.metadata?.sellAmount) || 0), 0);
+        const remaining = Math.max(0, buyAmount - sold);
+        const ratio = buyAmount ? remaining / buyAmount : 0;
+        const adjusted = currentNum * ratio;
+
+        totalsLocal[asset] = (totalsLocal[asset] || 0) + adjusted;
+        sumLocal += adjusted;
+      } else {
+        const soldWhole = (sellsByBuy[id] || []).length > 0;
+        if (!soldWhole) {
+          totalsLocal[asset] = (totalsLocal[asset] || 0) + currentNum;
+          sumLocal += currentNum;
+        }
+      }
     });
 
     if (sumLocal === 0) {
@@ -109,9 +136,7 @@ export function ActualWeightsChart({
 
     return { totals: totalsLocal, sum: sumLocal, data: finalData };
   }, [transactions, currentValues]);
-  
-  
-  
+
   const formatPLN = (value, digits = 0) =>
     new Intl.NumberFormat("pl-PL", {
       minimumFractionDigits: digits,

@@ -30,7 +30,9 @@ export function StockFields({
     setSuggestions([]);
 
     try {
-      const res = await backendApi.get("/assets/stocks/search");
+      const res = await backendApi.get("/assets/stocks/search", {
+        params: { q: query }
+      });
 
       setSuggestions(res.data ?? []);
     } finally {

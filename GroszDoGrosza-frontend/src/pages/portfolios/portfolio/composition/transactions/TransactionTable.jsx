@@ -80,6 +80,10 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
     }
   };
 
+  const hasBuyForAsset = (asset) => {
+    return transactions.some(t => t.asset === asset && t.type === "BUY");
+  }
+
   const allowedAssets = modelWeights?.map(w => w.asset) ?? [];
 
   if (disabled) {
@@ -119,8 +123,9 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
             <thead>
               <tr>
                 <th>Data</th>
+                <th>Typ</th>
                 <th>Typ aktywa</th>
-                <th>Kwota zakupu</th>
+                <th>Kwota transakcji</th>
                 <th>Wartość aktualna</th>
                 <th>Szczegóły</th>
                 <th>Akcje</th>
@@ -139,6 +144,7 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
                   onSave={(payload) => updateTransaction(t.id, payload)}
                   setDeleteId={setDeleteId}
                   setEditingTx={setEditingTx}
+                  transactions={transactions}
                 />
               ))}
             </tbody>
@@ -148,6 +154,8 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
         {addOpen && (
           <AddTransactionModal
             allowedAssets={allowedAssets}
+            hasBuyForAsset={hasBuyForAsset}
+            transactions={transactions}
             onClose={() => setAddOpen(false)}
             onSave={(tx) => {
               createTransaction(tx);
@@ -173,6 +181,8 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
             mode="edit"
             initialData={editingTx}
             allowedAssets={allowedAssets}
+            transactions={transactions}
+            hasBuyForAsset={hasBuyForAsset}
             onClose={() => setEditingTx(null)}
             onSave={(payload) => {
               updateTransaction(editingTx.id, payload);
@@ -185,10 +195,10 @@ export function TransactionsTable({ transactions = [], modelWeights, disabled, o
   );
 }
 
-function TransactionRow({ tx, assetLabelMap, editing, onCancel, onSave, setDeleteId, setEditingTx }) {
+function TransactionRow({ tx, assetLabelMap, editing, onCancel, onSave, setDeleteId, setEditingTx, transactions }) {
 
   const [local, setLocal] = useState({ ...tx });
-  
+
   return (
     <tr>
       <td>
@@ -197,6 +207,9 @@ function TransactionRow({ tx, assetLabelMap, editing, onCancel, onSave, setDelet
           month: "2-digit",
           day: "2-digit",
         })}
+      </td>
+      <td>
+        {tx.type === "BUY" ? "Kupno" : "Sprzedaż"}
       </td>
       <td>
         {assetLabelMap[tx.asset] ?? tx.asset}
@@ -215,11 +228,21 @@ function TransactionRow({ tx, assetLabelMap, editing, onCancel, onSave, setDelet
         )}
       </td>
       <td className="tx-current-value">
-        <CurrentValueCell tx={tx} />
+        {tx.type === "SELL" ? (
+          <span className="muted">—</span>
+        ) : (
+          <CurrentValueCell tx={tx} />
+        )}
       </td>
       <td>
-        <AssetDetails asset={tx.asset} metadata={tx.metadata} />
+        {tx.type === "SELL" ? (
+          <SellDetails tx={tx} allTransactions={transactions} />
+        ) : (
+          <AssetDetails asset={tx.asset} metadata={tx.metadata} />
+        )}
       </td>
+
+
       <td className="tx-actions">
         {editing ? (
           <>
@@ -405,3 +428,41 @@ function BondCurrentValue({ tx }) {
   );
 }
 
+function SellDetails({ tx, allTransactions }) {
+  const source = allTransactions.find(
+    t => t.id === tx.sourceTransactionId
+  );
+
+  if (!source) {
+    return <span className="muted">Brak źródła sprzedaży</span>;
+  }
+
+  const soldAmount =
+    tx.metadata?.sellAmount ?? source.metadata?.amount;
+
+  const metadataForDisplay = {
+    ...source.metadata,
+    amount: soldAmount,
+  };
+
+  return (
+    <div className="tx-details">
+      <div>
+        <strong>Sprzedaż:</strong>{" "}
+        {tx.metadata?.sellAmount
+          ? `${tx.metadata.sellAmount} szt.`
+          : "całość"}
+      </div>
+
+      <div>
+        <strong>Z aktywa:</strong>{" "}
+        {assetLabelMap[source.asset] ?? source.asset}
+      </div>
+
+      <AssetDetails
+        asset={source.asset}
+        metadata={metadataForDisplay}
+      />
+    </div>
+  );
+}

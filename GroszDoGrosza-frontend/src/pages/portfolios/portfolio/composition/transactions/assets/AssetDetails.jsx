@@ -31,14 +31,32 @@ function GoldDetails({ metadata }) {
     pricePerGram
   } = metadata;
 
+  const UNIT_LABEL = {
+    GRAM: "g",
+    OUNCE: "oz",
+    PIECE: "szt.",
+  };
+
   return (
     <div className="tx-details">
-      <div><strong>Forma:</strong> {form === "COIN" ? "Moneta" : "Sztabka"}</div>
-      <div><strong>Ilość:</strong> {amount} {unit}</div>
-      <div><strong>Cena/g:</strong> {pricePerGram} zł</div>
+      <div>
+        <strong>Forma:</strong>{" "}
+        {form === "COIN" ? "Moneta" : "Sztabka"}
+      </div>
+
+      <div>
+        <strong>Ilość:</strong>{" "}
+        {amount} {UNIT_LABEL[unit] ?? unit}
+      </div>
+
+      <div>
+        <strong>Cena / g:</strong>{" "}
+        {pricePerGram} zł
+      </div>
     </div>
   );
 }
+
 
 function RealEstateDetails({ metadata }) {
   const {
