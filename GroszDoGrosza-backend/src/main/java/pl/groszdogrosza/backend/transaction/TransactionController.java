@@ -11,6 +11,8 @@ import pl.groszdogrosza.backend.portfolio.PortfolioRepository;
 import java.time.Instant;
 import java.util.List;
 
+import static pl.groszdogrosza.backend.transaction.TransactionType.BUY;
+
 @RestController
 @RequestMapping("/api/portfolios/{portfolioId}/transactions")
 @RequiredArgsConstructor
@@ -26,9 +28,13 @@ public class TransactionController {
     ) {
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow();
-
+        
         Transaction tx = new Transaction();
         tx.setAsset(req.asset());
+        tx.setType(
+                req.type() != null
+                        ? req.type()
+                        : BUY);
         tx.setValue(req.value());
         tx.setMetadata(req.metadata());
         tx.setTransactionDate(
@@ -37,6 +43,10 @@ public class TransactionController {
                         : Instant.now()
         );
         tx.setPortfolio(portfolio);
+
+        if (req.sourceTransactionId() != null) {
+            repository.findById(req.sourceTransactionId()).ifPresent(tx::setSourceTransaction);
+        }
 
         return TransactionDto.from(repository.save(tx));
     }
@@ -57,11 +67,24 @@ public class TransactionController {
     ) {
         Transaction tx = repository.findByIdAndPortfolioId(id, portfolioId);
 
-        tx.setValue(req.value());
-        tx.setMetadata(req.metadata());
+        if (req.type() != null) {
+            tx.setType(req.type());
+        }
+
+        if (req.value() != null) {
+            tx.setValue(req.value());
+        }
+
+        if (req.metadata() != null) {
+            tx.setMetadata(req.metadata());
+        }
 
         if (req.transactionDate() != null) {
             tx.setTransactionDate(req.transactionDate());
+        }
+
+        if (req.sourceTransactionId() != null) {
+            repository.findById(req.sourceTransactionId()).ifPresent(tx::setSourceTransaction);
         }
 
         return TransactionDto.from(repository.save(tx));

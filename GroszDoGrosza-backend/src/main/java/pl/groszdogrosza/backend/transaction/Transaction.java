@@ -43,6 +43,14 @@ public class Transaction {
     @JoinColumn(name = "portfolio_id", nullable = false)
     private Portfolio portfolio;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TransactionType type;
+
+    @ManyToOne
+    @JoinColumn(name = "source_transaction_id")
+    private Transaction sourceTransaction;
+
     @PrePersist
     void onCreate() {
         this.createdAt = Instant.now();
