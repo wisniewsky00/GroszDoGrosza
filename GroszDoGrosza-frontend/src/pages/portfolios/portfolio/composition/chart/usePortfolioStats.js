@@ -68,6 +68,10 @@ export function usePortfolioStats(transactions = [], currentValues = {}) {
         investedRunning += Number(tx.value) || 0;
       }
 
+      if (tx.type === "SELL") {
+        investedRunning -= Number(tx.value) || 0;
+      }
+
       investedRunning = Math.max(0, investedRunning);
 
       const currentTotal = computeCurrentTotalAt(tx.__date);
@@ -78,6 +82,7 @@ export function usePortfolioStats(transactions = [], currentValues = {}) {
         current: currentTotal,
       };
     });
+
 
     const investedTotal = investedRunning;
     const currentTotal = computeCurrentTotalAt(sorted[sorted.length - 1].__date);
